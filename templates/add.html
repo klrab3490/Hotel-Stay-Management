@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Data Addition </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head> 
+
+    <body>
+        <form action="/add-data" method="POST">
+            <div class="form-item">
+                <label>
+                    <centre>
+                        <p>Add Data To Mongo DB</p>
+                    </centre>
+                </label>
+            </div>
+            <div class="form-item">
+                <label>Room Number : </label>
+                <div class="input-wrapper">
+                    <input type="number" name="roomNo" id="roomNo" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                </div>
+            </div>
+            <div class="form-item">
+                <label>User Name : </label>
+                <div class="input-wrapper">
+                    <input type="text" name="roomUser" id="roomUser" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Room User Count : </label>
+                <div class="input-wrapper">
+                    <input type="number" name="roomCount" id="roomCount" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Days Of Stay In The Hotel : </label>
+                <div class="input-wrapper">
+                    <input type="number" name="roomStay" id="roomStay" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                </div>
+            </div>
+            <button id="submit">Add</button>
+        </form>
+        <script src="{{url_for('static',filename='script.js')}}"></script>
+    </body>
+</html>

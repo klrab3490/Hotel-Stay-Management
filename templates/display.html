@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Data Addition </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head> 
+
+    <body>
+        <form action="/display-data" method="POST">
+            <table class="" >
+                <tr>
+                    <th class="px-4 py-3 w-35">Room No</th>
+                    <th class="px-4 py-3 w-35">User Name</th>
+                    <th class="px-4 py-3 w-35">People Count</th>
+                    <th class="px-4 py-3 w-35">Days Of Stay</th>
+                </tr>
+                {% for item in data %}
+                <tr>
+                    <td class="px-4 py-3">{{ item['RoomID'] }}</td>
+                    <td class="px-4 py-3">{{ item['User'] }}</td>
+                    <td class="px-4 py-3">{{ item['Count'] }}</td>
+                    <td class="px-4 py-3">{{ item['Stay'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button id="submit">Return To Menu</button>
+        </form>
+        <script src="{{url_for('static',filename='script.js')}}"></script>
+    </body>
+</html>

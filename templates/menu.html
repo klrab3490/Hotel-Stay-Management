@@ -1,0 +1,44 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hotel Management Menu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+
+    <body>
+<!-- Menu -->
+        <centre>
+            <form action="/menu-action" method="POST">
+                <div class="form-item">
+                    <label> Hotel Management Menu </label>
+                </div>
+                <div class="form-item">
+                    <label> 1.Add Room Data </label>
+                </div>
+                <div class="form-item">
+                    <label> 2.Remove Room Data </label>
+                </div>
+                <div class="form-item">
+                    <label> 3.Update Room Data </label>
+                </div>
+                <div class="form-item">
+                    <label> 4.Display Room Data </label>
+                </div>
+                <div class="form-item">
+                    <label> 5.Exit Management Application </label>
+                </div>
+                <div class="form-item">
+                    <label> Enter Choice </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="choice" id="choice">
+                    </div>
+                </div>
+                <button id="submit">Submit</button>
+            </form>
+        </centre>
+<!-- script -->>
+        <script src="{{url_for('static',filename='script.js')}}"></script>
+    </body>
+</html>
