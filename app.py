@@ -99,8 +99,7 @@ def update_data():
             return render_template("display.html",data=data)
         else:
             flash("No Data Entry")
-            return render_template("update.html")
-            
+            return render_template("update.html") 
             
 @app.route("/display-data",methods=['POST'])
 def display_data():
