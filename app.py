@@ -3,13 +3,12 @@ import pymongo
 import pandas as pd
 
 app = Flask(__name__)
+app.secret_key="string"
 
 # Initialize MongoDB client
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["Hotel"]
-table = db["Rooms"]
-
-data = table.find()
+table = db["Hotel-Room"]
 
 @app.route("/")
 @app.route("/home")
@@ -25,7 +24,8 @@ def login():
     elif username == "Rahul" and password == "kl.rab_3490":
         return render_template("menu.html")
     else:
-        return "Sorry, %s is unable to login" %username
+        flash("Sorry Unable To Login")
+        return render_template("index.html")
 
 @app.route("/menu-action",methods=['POST'])
 def menu():
@@ -37,13 +37,14 @@ def menu():
     elif choice == "3":
         return render_template("update.html")
     elif choice == "4":
+        data =table.find()
         return render_template("display.html",data=data)
     elif choice == "5":
         return render_template("index.html")
     else:
         return render_template("menu.html")
 
-@app.route("/add-data",methods=['POST'])
+@app.route("/add-data",methods=['POST','GET'])
 def add_data():
     roomNo = request.form['roomNo']
     roomUser = request.form['roomUser']
@@ -54,6 +55,53 @@ def add_data():
     data = table.find()
     return render_template("display.html",data=data)
 
+@app.route("/remove-data",methods=['POST'])
+def remove_data():
+    roomNo = request.form['roomNo']
+    content_delete = {"RoomID":roomNo}
+    delete_data = table.find_one(content_delete)
+    if delete_data == None:
+        flash("No Such Value Exits")
+        return render_template("menu.html")
+    else:
+        table.delete_one(content_delete)
+        data =table.find()
+        return render_template("display.html",data=data)
+
+@app.route("/update-data",methods=['POST'])
+def update_data():
+    roomNo = request.form['roomNo']
+    content_find = {"RoomID":roomNo}
+    search = table.find_one(content_find)
+    if search == None:
+        flash("No Data To Update")
+        return render_template("menu.html")
+    else:
+        nroomNo = request.form['nroomNo']
+        nroomUser = request.form['nroomUser']
+        nroomCount = request.form['nroomCount']
+        nroomStay = request.form['nroomStay']
+        data = table.find()
+        if nroomNo!=None and nroomUser==None and nroomStay==None and nroomUser==None:
+            table.update_one({"RoomID":roomNo},{"$set":{"RoomID":nroomNo}})
+            return render_template("display.html",data=data)
+        elif nroomUser!=None and nroomNo==None and nroomCount==None and nroomStay==None:
+            table.update_one({"RoomID":roomNo},{"$set":{"User":nroomUser}})
+            return render_template("display.html",data=data)
+        elif nroomCount!=None and nroomNo==None and nroomUser==None and nroomStay==None:
+            table.update_one({"RoomID":roomNo},{"$set":{"Count":nroomCount}})
+            return render_template("display.html",data=data)
+        elif nroomStay!=None and nroomNo==None and nroomUser==None and nroomCount==None:
+            table.update_one({"RoomID":roomNo},{"$set":{"Stay":nroomStay}})
+            return render_template("display.html",data=data)
+        elif nroomNo!=None and nroomUser!=None and nroomCount!=None and nroomStay!=None:
+            table.update_one({"RoomID":roomNo},{"$set":{"RoomID":nroomNo,"User":nroomUser,"Count":nroomCount,"Stay":nroomStay}})
+            return render_template("display.html",data=data)
+        else:
+            flash("No Data Entry")
+            return render_template("update.html")
+            
+            
 @app.route("/display-data",methods=['POST'])
 def display_data():
     data = table.find()

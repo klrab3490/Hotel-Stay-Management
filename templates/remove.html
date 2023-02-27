@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Remove Data From Table </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+
+    <body>
+        <centre>
+            <form action="/remove-data" method="POST">
+                <div class="form-item">
+                    <label>
+                        <centre>
+                            <p>Remove Data From Mongo DB</p>
+                        </centre>
+                        <div class="container">
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {{message}}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </label>
+                </div>
+                <div class="form-item">
+                    <label>Room Number : </label>
+                    <div class="input-wrapper">
+                        <input type="number" name="roomNo" id="roomNo" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true"data-lpignore="true"/> 
+                    </div>
+                </div>
+                <button id="submit">Remove</button>
+            </form>
+        </centre>
+        <script src="{{url_for('static',filename='script.js')}}"></script>
+    </body>
+</html>

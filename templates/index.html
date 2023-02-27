@@ -10,7 +10,23 @@
   </head>
   <body> 
 <!-- partial:index.partial.html --> 
-    <form action="/menu" method="POST">  
+    <form action="/menu" method="POST">
+      <div class="form-item">
+        <label>
+          <centre>
+            <p> Login Page </p>
+            <div class="container">
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    {{message}}
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+          </centre>
+        </label>
+      </div>  
       <div class="form-item">    
         <label>Username</label>
         <div class="input-wrapper">

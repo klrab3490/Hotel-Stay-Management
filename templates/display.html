@@ -10,20 +10,22 @@
 
     <body>
         <form action="/display-data" method="POST">
-            <table class="" >
-                <tr>
-                    <th class="px-4 py-3 w-35">Room No</th>
-                    <th class="px-4 py-3 w-35">User Name</th>
-                    <th class="px-4 py-3 w-35">People Count</th>
-                    <th class="px-4 py-3 w-35">Days Of Stay</th>
-                </tr>
-                {% for item in data %}
-                <tr>
-                    <td class="px-4 py-3">{{ item['RoomID'] }}</td>
-                    <td class="px-4 py-3">{{ item['User'] }}</td>
-                    <td class="px-4 py-3">{{ item['Count'] }}</td>
-                    <td class="px-4 py-3">{{ item['Stay'] }}</td>
-                </tr>
+            <table class="styled-table" >
+                <thead>
+                    <th>Room No</th>
+                    <th>User Name</th>
+                    <th>People Count</th>
+                    <th>Days Of Stay</th>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td class="name-row">{{item.RoomID}}</td>
+                        <td class="name-row">{{item.User}}</td>
+                        <td class="name-row">{{item.Count}}</td>
+                        <td class="name-row">{{item.Stay}}</td>
+                    </tr>
+                </tbody>
                 {% endfor %}
             </table>
             <button id="submit">Return To Menu</button>

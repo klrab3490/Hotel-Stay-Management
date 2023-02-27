@@ -9,7 +9,7 @@ class Hotel:
 	def __init__(self,n):
 		self.client = pymongo.MongoClient("mongodb://localhost:27017/")
 		self.db = self.client["Hotel"]
-		self.table = self.db["Rooms"]
+		self.table = self.db["Hotel-Room"]
 		while True:
 			print("Hotel Management\n 1.Add Room Data\n 2.Remove Room Data\n 3.Update Room Data\n 4.Display Room Data\n 5.Exit")
 			a = int(input("   Enter Choice : "))
