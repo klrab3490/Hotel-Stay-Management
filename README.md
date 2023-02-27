@@ -1,7 +1,7 @@
 # Hotel-Stay-Management
 
 install:
-  pip install pandas
+  pip install pandas\n
   pip install pymongo
   pip install flask
   
