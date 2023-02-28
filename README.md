@@ -1,13 +1,23 @@
 # Hotel-Stay-Management
 
-## install:
+## Install In Terminal :
 ```
   pip install pandas
   pip install pymongo
   pip install flask
 ```
-  
-## install mongo : 
+## Install Python :
 
-- [Linux](https://wiki.crowncloud.net/How_To_Install_Duf_On_Ubuntu_22_04?How_to_Install_Latest_MongoDB_on_Ubuntu_22_04)
-- [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+- [Linux-Python](https://www.python.org/downloads/source/)
+- [Windows-Python](https://www.python.org/downloads/windows/)
+- [MacOS-Python](https://www.python.org/downloads/macos/)
+
+## Install Mongo DB : 
+
+- [Linux-MongoDB](https://wiki.crowncloud.net/How_To_Install_Duf_On_Ubuntu_22_04?How_to_Install_Latest_MongoDB_on_Ubuntu_22_04)
+- [Windows-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+- [MacOS-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+
+## Install Flask :
+
+- [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
