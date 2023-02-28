@@ -28,3 +28,8 @@ cd Hotel-Stay-Management
 ## Install Flask :
 
 - [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
+
+### Current Error :
+
+- Updation is not working
+- Hope to recieve on how to clear the update error
