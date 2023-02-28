@@ -1,5 +1,12 @@
 # Hotel-Stay-Management
 
+## Copy Code:
+```
+sudo apt install git
+git clone https://github.com/klrab3490/Hotel-Stay-Management.git
+cd Hotel-Stay-Management
+```
+
 ## Install In Terminal :
 ```
   pip install pandas
