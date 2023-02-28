@@ -1,6 +1,6 @@
 # Hotel-Stay-Management
 
-## Copy Code:
+## Copy Git Repository :
 ```
 sudo apt install git
 git clone https://github.com/klrab3490/Hotel-Stay-Management.git
