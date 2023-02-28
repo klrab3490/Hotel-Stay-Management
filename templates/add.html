@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
     </head> 
 
-    <body>
+    <body background="{{ url_for('static',filename='MacOS.jpg')}}">
+        <centre>
+            <p>Add Data To Mongo DB</p>
+        </centre>
         <form action="/add-data" method="POST">
             <div class="form-item">
                 <label>
