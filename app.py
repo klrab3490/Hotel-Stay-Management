@@ -68,7 +68,7 @@ def remove_data():
         data =table.find()
         return render_template("display.html",data=data)
 
-@app.route("/update-data",methods=['POST'])
+@app.route("/update-data",methods=['GET'])
 def update_data():
     roomNo = request.form['roomNo']
     content_find = {"RoomID":roomNo}
@@ -82,7 +82,7 @@ def update_data():
         nroomCount = request.form['nroomCount']
         nroomStay = request.form['nroomStay']
         data = table.find()
-        if nroomNo!=None and nroomUser==None and nroomStay==None and nroomUser==None:
+        if nroomNo!="":
             table.update_one({"RoomID":roomNo},{"$set":{"RoomID":nroomNo}})
             return render_template("display.html",data=data)
         elif nroomUser!=None and nroomNo==None and nroomCount==None and nroomStay==None:
