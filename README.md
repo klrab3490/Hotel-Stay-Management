@@ -36,8 +36,8 @@ cd Hotel-Stay-Management
 - To run code in Windows ``` 
 python app.p```
 - To run code Linus ```
-python3 app.py 
-```
+python3 app.py ```
+
 
 ### Current Error :
 
