@@ -30,11 +30,11 @@ cd Hotel-Stay-Management
 - [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
 
 ## To Run :
-'''
+```
    cd ~/Hotel-Stay-Management
-'''
-- To run code in Windows ' python app.py'
-- To run code Linus 'pythin3'
+```
+- To run code in Windows ``` python app.p```
+- To run code Linus ```python3 app.py
 
 ### Current Error :
 
