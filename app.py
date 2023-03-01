@@ -1,7 +1,8 @@
-from flask import *
-import pymongo
-import pandas as pd
+# Import Statements
+from flask import *   #Flask to make python program to a web-application 
+import pymongo. # To connect to MongoDB 
 
+# Define Flask app and secret key to show messages in Flask Web
 app = Flask(__name__)
 app.secret_key="string"
 
@@ -10,11 +11,13 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["Hotel"]
 table = db["Hotel-Room"]
 
+#Main Page
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("index.html")
 
+#Login In Check 
 @app.route("/menu",methods=['POST'])
 def login():
     username = request.form['username']
@@ -27,6 +30,7 @@ def login():
         flash("Sorry Unable To Login")
         return render_template("index.html")
 
+# Menu Section
 @app.route("/menu-action",methods=['POST'])
 def menu():
     choice = request.form['choice']
@@ -44,6 +48,7 @@ def menu():
     else:
         return render_template("menu.html")
 
+# Adding Data To MongoDB
 @app.route("/add-data",methods=['POST','GET'])
 def add_data():
     roomNo = request.form['roomNo']
@@ -55,6 +60,7 @@ def add_data():
     data = table.find()
     return render_template("display.html",data=data)
 
+# Removing Data From MongoDB 
 @app.route("/remove-data",methods=['POST'])
 def remove_data():
     roomNo = request.form['roomNo']
@@ -68,6 +74,7 @@ def remove_data():
         data =table.find()
         return render_template("display.html",data=data)
 
+# Updating Data In MongoDB
 @app.route("/update-data",methods=['GET'])
 def update_data():
     roomNo = request.form['roomNo']
@@ -100,11 +107,13 @@ def update_data():
         else:
             flash("No Data Entry")
             return render_template("update.html") 
-            
+ 
+# Display Data In MongoDB          
 @app.route("/display-data",methods=['POST'])
 def display_data():
     data = table.find()
     return render_template("menu.html")
 
+# To start Flask Application 
 if __name__ == '__main__':
     app.run(debug=True,port=5001)
