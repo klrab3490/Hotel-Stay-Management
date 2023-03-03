@@ -25,7 +25,7 @@ cd Hotel-Stay-Management
 - [Windows-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
 - [MacOS-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
 
-## Install Flask :
+## Flask :
 
 - [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
 
