@@ -33,8 +33,8 @@ cd Hotel-Stay-Management
 ```
    cd ~/Hotel-Stay-Management
 ```
-- To run code in Windows  ```python app.py```
-- To run code Linus ```python3 app.py ```
+- To run code in Windows :  ```python app.py```
+- To run code Linus :  ```python3 app.py ```
 
 
 ### Current Error :
