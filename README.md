@@ -9,7 +9,7 @@ cd Hotel-Stay-Management
 ```
 - Windows : \
   Download [Git](https://git-scm.com/downloads)\
-  Download [Git Desktop](https://desktop.github.com/)\
+  Download [Git Desktop](https://desktop.github.com/)
 ```
 git clone https://github.com/klrab3490/Hotel-Stay-Management.git
 cd Hotel-Stay-Management
