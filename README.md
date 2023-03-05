@@ -1,6 +1,7 @@
 # Hotel-Stay-Management
 
 ## Copy Git Repository :
+
 - Ubuntu : 
 ```
 sudo apt install git
@@ -8,8 +9,8 @@ git clone https://github.com/klrab3490/Hotel-Stay-Management.git
 cd Hotel-Stay-Management
 ```
 - Windows : \
-  Download [Git Bash](https://git-scm.com/downloads)\
-  Download [Git Desktop](https://desktop.github.com/)
+  Download [Git Bash](https://git-scm.com/download/win)\
+  Download [Git Desktop](https://central.github.com/deployments/desktop/desktop/latest/win32)
 ```
 git clone https://github.com/klrab3490/Hotel-Stay-Management.git
 cd Hotel-Stay-Management
@@ -51,3 +52,8 @@ cd Hotel-Stay-Management
 
 - Updation is not working
 - Hope to recieve on how to clear the update error
+
+## Changes To Make To Run the Code In Your Database :
+
+- Change the client to
+```client = pymongo.MongoClient("mongodb://localhost:27017/")```
