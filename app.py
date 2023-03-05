@@ -1,6 +1,6 @@
 # Import Statements
 from flask import *   #Flask to make python program to a web-application 
-import pymongo. # To connect to MongoDB 
+import pymongo # To connect to MongoDB 
 
 # Define Flask app and secret key to show messages in Flask Web
 app = Flask(__name__)
