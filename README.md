@@ -1,8 +1,16 @@
 # Hotel-Stay-Management
 
-## Copy Code:
+## Copy Git Repository :
+- Ubuntu : 
 ```
 sudo apt install git
+git clone https://github.com/klrab3490/Hotel-Stay-Management.git
+cd Hotel-Stay-Management
+```
+- Windows : \
+  Download [Git Bash](https://git-scm.com/downloads)\
+  Download [Git Desktop](https://desktop.github.com/)
+```
 git clone https://github.com/klrab3490/Hotel-Stay-Management.git
 cd Hotel-Stay-Management
 ```
@@ -25,6 +33,21 @@ cd Hotel-Stay-Management
 - [Windows-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
 - [MacOS-MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
 
-## Install Flask :
+## Flask :
 
 - [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
+
+## To Run :
+```
+   cd ~/Hotel-Stay-Management
+```
+- To run code in Windows : \
+```python app.py```
+- To run code Linus :  \
+```python3 app.py ```
+
+
+### Current Error :
+
+- Updation is not working
+- Hope to recieve on how to clear the update error
