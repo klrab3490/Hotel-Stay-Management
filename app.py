@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key="string"
 
 # Initialize MongoDB client
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb+srv://rahulab664:CEZkFDDlOjL253bL@hotel.o79aes9.mongodb.net/?retryWrites=true&w=majority")
 db = client["Hotel"]
 table = db["Hotel-Room"]
 
