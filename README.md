@@ -56,4 +56,6 @@ cd Hotel-Stay-Management
 ## Changes To Make To Run the Code In Your Database :
 
 - Change the client to
-```client = pymongo.MongoClient("mongodb://localhost:27017/")```
+```
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+```
