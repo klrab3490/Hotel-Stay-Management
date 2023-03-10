@@ -18,50 +18,53 @@ def home():
     return render_template("index.html")
 
 #Login In Check 
-@app.route("/menu",methods=['POST'])
+@app.route("/menu",methods=['POST','GET'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
-    if username == "admin" and password == "admin":
-        return render_template("menu.html")
-    elif username == "Rahul" and password == "kl.rab_3490":
-        return render_template("menu.html")
-    else:
-        flash("Sorry Unable To Login")
-        return render_template("index.html")
-
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == "admin" and password == "admin":
+            return render_template("menu.html")
+        elif username == "Rahul" and password == "kl.rab_3490":
+            return render_template("menu.html")
+        else:
+            flash("Sorry Unable To Login")
+            return render_template("index.html")
+    
 # Menu Section
-@app.route("/menu-action",methods=['POST'])
+@app.route("/menu-action",methods=['POST','GET'])
 def menu():
-    choice = request.form['choice']
-    if choice == "1":
-        return render_template("add.html")
-    elif choice == "2":
-        return render_template("remove.html")
-    elif choice == "3":
-        return render_template("update.html")
-    elif choice == "4":
-        data =table.find()
-        return render_template("display.html",data=data)
-    elif choice == "5":
-        return render_template("index.html")
-    else:
-        return render_template("menu.html")
-
+    if request.method == 'POST':
+        choice = request.form['choice']
+        if choice == "1":
+            return render_template("add.html")
+        elif choice == "2":
+            return render_template("remove.html")
+        elif choice == "3":
+            return render_template("update.html")
+        elif choice == "4":
+            data =table.find()
+            return render_template("display.html",data=data)
+        elif choice == "5":
+            return render_template("index.html")
+        else:
+            return render_template("menu.html")
+    
 # Adding Data To MongoDB
 @app.route("/add-data",methods=['POST','GET'])
 def add_data():
-    roomNo = request.form['roomNo']
-    roomUser = request.form['roomUser']
-    roomCount = request.form['roomCount']
-    roomStay = request.form['roomStay']
-    content_add={"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}
-    x = table.insert_one(content_add)
-    data = table.find()
-    return render_template("display.html",data=data)
+    if request.method =='POST':
+        roomNo = request.form['roomNo']
+        roomUser = request.form['roomUser']
+        roomCount = request.form['roomCount']
+        roomStay = request.form['roomStay']
+        content_add={"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}
+        x = table.insert_one(content_add)
+        data = table.find()
+        return render_template("display.html",data=data)
 
 # Removing Data From MongoDB 
-@app.route("/remove-data",methods=['POST'])
+@app.route("/remove-data",methods=['POST','GET'])
 def remove_data():
     roomNo = request.form['roomNo']
     content_delete = {"RoomID":roomNo}
@@ -75,41 +78,47 @@ def remove_data():
         return render_template("display.html",data=data)
 
 # Updating Data In MongoDB
-@app.route("/update-data",methods=['GET'])
+@app.route("/update-data",methods=['GET','POST'])
 def update_data():
     roomNo = request.form['roomNo']
     content_find = {"RoomID":roomNo}
     search = table.find_one(content_find)
-    if search == None:
-        flash("No Data To Update")
-        return render_template("menu.html")
-    else:
+    if request.method == 'POST':
         nroomNo = request.form['nroomNo']
         nroomUser = request.form['nroomUser']
         nroomCount = request.form['nroomCount']
         nroomStay = request.form['nroomStay']
-        data = table.find()
         if nroomNo!="":
-            table.update_one({"RoomID":roomNo},{"$set":{"RoomID":nroomNo}})
+            content_update = {"$set":{"RoomID":nroomNo}}
+            table.update_one(content_find,content_update)        
+            data = table.find()
             return render_template("display.html",data=data)
         elif nroomUser!=None and nroomNo==None and nroomCount==None and nroomStay==None:
-            table.update_one({"RoomID":roomNo},{"$set":{"User":nroomUser}})
+            content_update = {"$set":{"User":nroomUser}}
+            table.update_one(content_find,content_update)
+            data = table.find()
             return render_template("display.html",data=data)
         elif nroomCount!=None and nroomNo==None and nroomUser==None and nroomStay==None:
-            table.update_one({"RoomID":roomNo},{"$set":{"Count":nroomCount}})
+            content_update = {"$set":{"Count":nroomCount}}
+            table.update_one(content_find,content_update)
+            data = table.find() 
             return render_template("display.html",data=data)
         elif nroomStay!=None and nroomNo==None and nroomUser==None and nroomCount==None:
-            table.update_one({"RoomID":roomNo},{"$set":{"Stay":nroomStay}})
+            content_update = {"$set":{"Stay":nroomStay}}
+            table.update_one(content_find,content_update)
+            data = table.find()
             return render_template("display.html",data=data)
         elif nroomNo!=None and nroomUser!=None and nroomCount!=None and nroomStay!=None:
-            table.update_one({"RoomID":roomNo},{"$set":{"RoomID":nroomNo,"User":nroomUser,"Count":nroomCount,"Stay":nroomStay}})
+            content_update = {"$set":{"RoomID":nroomNo,"User":nroomUser,"Count":nroomCount,"Stay":nroomStay}}
+            table.update_one(content_find,content_update)
+            data = table.find()
             return render_template("display.html",data=data)
         else:
             flash("No Data Entry")
             return render_template("update.html") 
  
 # Display Data In MongoDB          
-@app.route("/display-data",methods=['POST'])
+@app.route("/display-data",methods=['POST','GET'])
 def display_data():
     data = table.find()
     return render_template("menu.html")

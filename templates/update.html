@@ -10,33 +10,24 @@
 
     <body background="{{ url_for('static',filename='MacOS.jpg')}}">
         <centre>
-            <form action="/update-data" method="GET">
+            <form action="/update-data" method="POST">
                 <div class="form-item">
                     <label>
                         <centre>
                             <p> Update Data Of Mongo DB</p>
                         </centre>
-                        <div class="container">
-                            {% with messages = get_flashed_messages() %}
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        {{message}}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endwith %}
-                        </div>
                     </label>
                 </div>
                 <div class="form-item">
-                    <label>Room Number : </label>
+                    <label for="RoomID">Room Number : </label>
                     <div class="input-wrapper">
-                        <input type="number" name="roomNo" id="roomNo" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                        <input type="text" name="roomNo" id="roomNo" data-lpignore="true"/>
                     </div>
                 </div>
                 <div class="form-item">
-                    <label>New Room Number : </label>
+                    <label for="New RoomID">New Room Number : </label>
                     <div class="input-wrapper">
-                        <input type="number" name="nnoomNo" id="nroomNo" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                        <input type="text" name="nnoomNo" id="nroomNo" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
                     </div>
                 </div>
                 <div class="form-item">
