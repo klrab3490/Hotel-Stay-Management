@@ -10,6 +10,20 @@
 
     <body background="{{ url_for('static',filename='MacOS.jpg')}}">
         <form action="/display-data" method="POST">
+            <div class="form-item">
+                <label>
+                    <p>Display Data</p> 
+                    <div class="container">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{message}}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </label>
+            </div>
             <table class="styled-table" >
                 <thead>
                     <th>Room No</th>

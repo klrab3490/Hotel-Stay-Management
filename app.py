@@ -103,22 +103,27 @@ def remove_data():
 # Updating Data In MongoDB
 @app.route("/update_data/<room_id>",methods=['GET','POST'])
 def update_data(room_id):
-    book = table.find_one({'_id':ObjectId(room_id)})
-    if request.method == 'POST':
-        roomNo = request.form['roomNo']
-        roomUser = request.form['roomUser']
-        roomCount = request.form['roomCount']
-        roomStay = request.form['roomStay']
-        table.update_one(
-            {'_id':ObjectId(room_id)},
-            {'$set':{"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}}
-        )
-        data = table.find()
-        return render_template("display.html",data=data)
+    if ObjectId.is_valid(room_id):
+        book = table.find_one({'_id':ObjectId(room_id)})
+        if request.method == 'POST':
+            roomNo = request.form['roomNo']
+            roomUser = request.form['roomUser']
+            roomCount = request.form['roomCount']
+            roomStay = request.form['roomStay']
+            table.update_one(
+                {'_id':ObjectId(room_id)},
+                {'$set':{"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}}
+            )
+            data = table.find()
+            return render_template("display.html",data=data)
+        else:
+            data = table.find()
+            flash("No Data Entry")            
+            return render_template("update.html",data=data)
     else:
-        render_template("update.html")
-        flash("No Data Entry")            
-        return render_template("update.html") 
+        data = table.find()
+        flash("Error")
+        return render_template("display.html",data=data) 
  
 # Display Data In MongoDB          
 @app.route("/display-data",methods=['POST','GET'])
