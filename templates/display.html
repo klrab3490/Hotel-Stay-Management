@@ -16,14 +16,18 @@
                     <th>User Name</th>
                     <th>People Count</th>
                     <th>Days Of Stay</th>
+                    <th>Update</th>
                 </thead>
                 <tbody>
                     {% for item in data %}
                     <tr>
-                        <td class="name-row">{{item.RoomID}}</td>
-                        <td class="name-row">{{item.User}}</td>
-                        <td class="name-row">{{item.Count}}</td>
-                        <td class="name-row">{{item.Stay}}</td>
+                        <td class="name-row">{{ item['RoomID'] }}</td>
+                        <td class="name-row">{{ item['User'] }}</td>
+                        <td class="name-row">{{ item['Count'] }}</td>
+                        <td class="name-row">{{ item['Stay'] }}</td>
+                        <td class="name-row">
+                            <a href="{{ url_for('update_data',room_id=item['_id'])}}">Update</a>
+                        </td>
                     </tr>
                 </tbody>
                 {% endfor %}

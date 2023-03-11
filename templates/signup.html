@@ -10,11 +10,11 @@
     </head>
     <body background="{{ url_for('static',filename='MacOS.jpg')}}"> 
 <!--partial:index.partial.html -->
-        <form action="/menu" method="POST">
+        <form action="/signup" method="POST">
             <div class="form-item"> 
                 <label>
                     <centre>
-                        <p> Login Page </p> 
+                        <p> Sign Up Page </p> 
                         <div class="container">
                             {% with messages = get_flashed_messages() %}
                                 {% if messages %}

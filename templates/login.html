@@ -1,0 +1,43 @@
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">  
+        <title> Hotel Management Login </title>  
+        <meta name="viewport" content="width=device-width, initial-scale=1">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    
+    <body background="{{ url_for('static',filename='MacOS.jpg')}}"> 
+<!--partial:index.partial.html -->
+        <form action="/login" method="POST">
+            <div class="form-item"> 
+                <label>
+                    <centre>
+                        <p> Login Page </p> 
+                    </centre>
+                </label>
+            </div> 
+            <div class="form-item">    
+                <label>Username</label>
+                <div class="input-wrapper">
+                    <input type="text" name="username" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Password</label>
+                <div class="input-wrapper">
+                    <input type="password" name="password" id="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>      
+                    <button type="button" id="eyeball">
+                        <div class="eye"></div>
+                    </button>
+                    <div id="beam"></div>
+                </div>
+            </div>
+            <button id="submit">Sign in</button>
+        </form>
+<!-- partial -->
+        <script  src="{{url_for('static',filename='script.js')}}"></script>
+    </body>
+</html>

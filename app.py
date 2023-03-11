@@ -1,6 +1,7 @@
 # Import Statements
-from flask import *   #Flask to make python program to a web-application 
+from flask import * #Flask to make python program to a web-application 
 import pymongo # To connect to MongoDB 
+from bson.objectid import ObjectId
 
 # Define Flask app and secret key to show messages in Flask Web
 app = Flask(__name__)
@@ -10,15 +11,16 @@ app.secret_key="string"
 client = pymongo.MongoClient("mongodb+srv://rahulab664:CEZkFDDlOjL253bL@hotel.o79aes9.mongodb.net/?retryWrites=true&w=majority")
 db = client["Hotel"]
 table = db["Hotel-Room"]
+user = db["User"]
 
 #Main Page
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html")
+    return render_template("login.html")
 
-#Login In Check 
-@app.route("/menu",methods=['POST','GET'])
+#Login 
+@app.route("/login",methods=['POST','GET'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -28,8 +30,23 @@ def login():
         elif username == "Rahul" and password == "kl.rab_3490":
             return render_template("menu.html")
         else:
-            flash("Sorry Unable To Login")
-            return render_template("index.html")
+            user_find = user.find_one({"username":username,'password':password})
+            if user_find:
+                return render_template("menu.html")
+            else:
+                render_template("signup.html")
+                flash("Login Failed")
+                return render_template("signup.html")
+
+#SignUp
+@app.route("/signup",methods=['POST','GET'])
+def sign():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_add = {"username":username,'password':password}
+        y = user.insert_one(user_add) #Add username and password
+        return render_template("menu.html")
     
 # Menu Section
 @app.route("/menu-action",methods=['POST','GET'])
@@ -41,12 +58,10 @@ def menu():
         elif choice == "2":
             return render_template("remove.html")
         elif choice == "3":
-            return render_template("update.html")
-        elif choice == "4":
             data =table.find()
             return render_template("display.html",data=data)
-        elif choice == "5":
-            return render_template("index.html")
+        elif choice == "4":
+            return render_template("login.html")
         else:
             return render_template("menu.html")
     
@@ -58,64 +73,52 @@ def add_data():
         roomUser = request.form['roomUser']
         roomCount = request.form['roomCount']
         roomStay = request.form['roomStay']
-        content_add={"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}
-        x = table.insert_one(content_add)
+        room = {
+            "RoomID":roomNo,
+            "User":roomUser,
+            "Count":roomCount,
+            "Stay":roomStay
+        }
+        x = table.insert_one(room)
         data = table.find()
         return render_template("display.html",data=data)
 
 # Removing Data From MongoDB 
 @app.route("/remove-data",methods=['POST','GET'])
 def remove_data():
-    roomNo = request.form['roomNo']
-    content_delete = {"RoomID":roomNo}
-    delete_data = table.find_one(content_delete)
-    if delete_data == None:
-        flash("No Such Value Exits")
-        return render_template("menu.html")
-    else:
-        table.delete_one(content_delete)
-        data =table.find()
-        return render_template("display.html",data=data)
-
-# Updating Data In MongoDB
-@app.route("/update-data",methods=['GET','POST'])
-def update_data():
-    roomNo = request.form['roomNo']
-    content_find = {"RoomID":roomNo}
-    search = table.find_one(content_find)
     if request.method == 'POST':
-        nroomNo = request.form['nroomNo']
-        nroomUser = request.form['nroomUser']
-        nroomCount = request.form['nroomCount']
-        nroomStay = request.form['nroomStay']
-        if nroomNo!="":
-            content_update = {"$set":{"RoomID":nroomNo}}
-            table.update_one(content_find,content_update)        
-            data = table.find()
-            return render_template("display.html",data=data)
-        elif nroomUser!=None and nroomNo==None and nroomCount==None and nroomStay==None:
-            content_update = {"$set":{"User":nroomUser}}
-            table.update_one(content_find,content_update)
-            data = table.find()
-            return render_template("display.html",data=data)
-        elif nroomCount!=None and nroomNo==None and nroomUser==None and nroomStay==None:
-            content_update = {"$set":{"Count":nroomCount}}
-            table.update_one(content_find,content_update)
-            data = table.find() 
-            return render_template("display.html",data=data)
-        elif nroomStay!=None and nroomNo==None and nroomUser==None and nroomCount==None:
-            content_update = {"$set":{"Stay":nroomStay}}
-            table.update_one(content_find,content_update)
-            data = table.find()
-            return render_template("display.html",data=data)
-        elif nroomNo!=None and nroomUser!=None and nroomCount!=None and nroomStay!=None:
-            content_update = {"$set":{"RoomID":nroomNo,"User":nroomUser,"Count":nroomCount,"Stay":nroomStay}}
-            table.update_one(content_find,content_update)
-            data = table.find()
-            return render_template("display.html",data=data)
+        roomNo = request.form['roomNo']
+        content_delete = {"RoomID":roomNo}
+        delete_data = table.find_one(content_delete)
+        if delete_data == None:        
+            flash("No Such Value Exits") 
+            return render_template("menu.html")
         else:
-            flash("No Data Entry")
-            return render_template("update.html") 
+            table.delete_one(content_delete)
+            data =table.find()
+            return render_template("display.html",data=data)
+    else:
+        return render_template("menu.html")    
+    
+# Updating Data In MongoDB
+@app.route("/update_data/<room_id>",methods=['GET','POST'])
+def update_data(room_id):
+    book = table.find_one({'_id':ObjectId(room_id)})
+    if request.method == 'POST':
+        roomNo = request.form['roomNo']
+        roomUser = request.form['roomUser']
+        roomCount = request.form['roomCount']
+        roomStay = request.form['roomStay']
+        table.update_one(
+            {'_id':ObjectId(room_id)},
+            {'$set':{"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}}
+        )
+        data = table.find()
+        return render_template("display.html",data=data)
+    else:
+        render_template("update.html")
+        flash("No Data Entry")            
+        return render_template("update.html") 
  
 # Display Data In MongoDB          
 @app.route("/display-data",methods=['POST','GET'])
@@ -125,4 +128,4 @@ def display_data():
 
 # To start Flask Application 
 if __name__ == '__main__':
-    app.run(debug=True,port=5001)
+    app.run(debug=True)
