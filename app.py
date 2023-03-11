@@ -101,7 +101,7 @@ def remove_data():
         return render_template("menu.html")    
     
 # Updating Data In MongoDB
-@app.route("/update_data/<room_id>",methods=['GET','POST'])
+@app.route('/update_data/<room_id>',methods=['GET','POST'])
 def update_data(room_id):
     if ObjectId.is_valid(room_id):
         book = table.find_one({'_id':ObjectId(room_id)})
