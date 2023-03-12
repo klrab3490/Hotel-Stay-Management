@@ -50,14 +50,14 @@ python app.py
 python3 app.py 
 ```
 
-### Current Error :
-
-- Updation is not working
-- Hope to recieve on how to clear the update error
-
 ## Changes To Make To Run the Code In Your Database :
 
 - Change the client to
 ```
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 ```
+
+### Current Error :
+
+- Updation is not working
+- Hope to recieve on how to clear the update error
