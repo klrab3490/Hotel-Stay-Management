@@ -10,7 +10,7 @@
     </head> 
 
     <body background="{{ url_for('static',filename='MacOS.jpg')}}">
-        <form method="POST" action="/update_data">
+        <form action="/update_data" method="POST">
             <div class="form-item">
                 <label>
                     <centre>
@@ -18,28 +18,29 @@
                     </centre>
                 </label>
             </div>
+            {}
             <div class="form-item">
                 <label>Room Number : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomNo" id="roomNo" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                    <input type="number" name="roomNo" id="roomNo" value="{{ book['RoomID'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>User Name : </label>
                 <div class="input-wrapper">
-                    <input type="text" name="roomUser" id="roomUser" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                    <input type="text" name="roomUser" id="roomUser" value="{{ book['User'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>Room User Count : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomCount" id="roomCount" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                    <input type="number" name="roomCount" id="roomCount" value="{{ book['Count'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>Days Of Stay In The Hotel : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomStay" id="roomStay" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"/>
+                    <input type="number" name="roomStay" id="roomStay" value="{{ book['Stay'] }}">
                 </div>
             </div>
             <button id="submit">Update</button>

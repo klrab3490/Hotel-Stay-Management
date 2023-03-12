@@ -104,8 +104,7 @@ def remove_data():
 @app.route('/update_data/<id>',methods=['GET','POST'])
 def update_data(id):
     book = table.find_one({'_id':ObjectId(id)})
-    return render_template("update.html",id=id)   
-def update_datas():
+    render_template("update.html",book=book)  
     if request.method == 'POST': 
         roomNo = request.form['roomNo']        
         roomUser = request.form['roomUser']
