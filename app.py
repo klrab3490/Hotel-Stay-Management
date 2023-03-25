@@ -1,6 +1,6 @@
 # Import Statements
-from flask import * #Flask to make python program to a web-application 
-import pymongo # To connect to MongoDB 
+from flask import Flask,render_template,request,flash #Flask to make python program to a web-application
+import pymongo # To connect to MongoDB
 from bson.objectid import ObjectId
 
 # Define Flask app and secret key to show messages in Flask Web
@@ -19,7 +19,7 @@ user = db["User"]
 def home():
     return render_template("login.html")
 
-#Login 
+#Login
 @app.route("/login",methods=['POST','GET'])
 def login():
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def sign():
         user_add = {"username":username,'password':password}
         y = user.insert_one(user_add) #Add username and password
         return render_template("menu.html")
-    
+
 # Menu Section
 @app.route("/menu-action",methods=['POST','GET'])
 def menu():
@@ -64,7 +64,7 @@ def menu():
             return render_template("login.html")
         else:
             return render_template("menu.html")
-    
+
 # Adding Data To MongoDB
 @app.route("/add-data",methods=['POST','GET'])
 def add_data():
@@ -83,30 +83,30 @@ def add_data():
         data = table.find()
         return render_template("display.html",data=data)
 
-# Removing Data From MongoDB 
+# Removing Data From MongoDB
 @app.route("/remove-data",methods=['POST','GET'])
 def remove_data():
     if request.method == 'POST':
         roomNo = request.form['roomNo']
         content_delete = {"RoomID":roomNo}
         delete_data = table.find_one(content_delete)
-        if delete_data == None:        
-            flash("No Such Value Exits") 
+        if delete_data == None:
+            flash("No Such Value Exits")
             return render_template("menu.html")
         else:
             table.delete_one(content_delete)
             data =table.find()
             return render_template("display.html",data=data)
     else:
-        return render_template("menu.html")    
-    
+        return render_template("menu.html")
+
 # Updating Data In MongoDB
 @app.route('/update_data/<id>',methods=['GET','POST'])
 def update_data(id):
     book = table.find_one({'_id':ObjectId(id)})
-    render_template("update.html",book=book)  
-    if request.method == 'POST': 
-        roomNo = request.form['roomNo']        
+    render_template("update.html",book=book)
+    if request.method == 'POST':
+        roomNo = request.form['roomNo']
         roomUser = request.form['roomUser']
         roomCount = request.form['roomCount']
         roomStay = request.form['roomStay']
@@ -115,16 +115,15 @@ def update_data(id):
             {'$set':{"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}}
         )
         data = table.find()
-        return render_template("display.html",data=data)        
-    else:            
-        return render_template("update.html") 
-  
-# Display Data In MongoDB          
+        return render_template("display.html",data=data)
+    else:
+        return render_template("update.html")
+
+# Display Data In MongoDB
 @app.route("/display-data",methods=['POST','GET'])
 def display_data():
-    data = table.find()
     return render_template("menu.html")
 
-# To start Flask Application 
+# To start Flask Application
 if __name__ == '__main__':
     app.run(debug=True)
