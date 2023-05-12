@@ -10,37 +10,36 @@
     </head> 
 
     <body background="{{ url_for('static',filename='MacOS.jpg')}}">
-        <form action="/update_data" method="POST">
-            <div class="form-item">
-                <label>
-                    <centre>
-                        <p>Update Data To Mongo DB</p>
-                    </centre>
-                </label>
-            </div>
-            {}
+        <div class="form-item">
+            <label>
+                <centre>
+                    <p>Update Data To Mongo DB</p>
+                </centre>
+            </label>
+        </div>
+        <form action="{{ url_for('update_item',item_id=item['_id'])}}" method="POST">           
             <div class="form-item">
                 <label>Room Number : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomNo" id="roomNo" value="{{ book['RoomID'] }}">
+                    <input type="number" name="roomNo" id="roomNo" value="{{ item['RoomID'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>User Name : </label>
                 <div class="input-wrapper">
-                    <input type="text" name="roomUser" id="roomUser" value="{{ book['User'] }}">
+                    <input type="text" name="roomUser" id="roomUser" value="{{ item['User'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>Room User Count : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomCount" id="roomCount" value="{{ book['Count'] }}">
+                    <input type="number" name="roomCount" id="roomCount" value="{{ item['Count'] }}">
                 </div>
             </div>
             <div class="form-item">
                 <label>Days Of Stay In The Hotel : </label>
                 <div class="input-wrapper">
-                    <input type="number" name="roomStay" id="roomStay" value="{{ book['Stay'] }}">
+                    <input type="number" name="roomStay" id="roomStay" value="{{ item['Stay'] }}">
                 </div>
             </div>
             <button id="submit">Update</button>

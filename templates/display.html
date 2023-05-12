@@ -10,7 +10,7 @@
     </head> 
 
     <body background="{{ url_for('static',filename='MacOS.jpg')}}">
-        <form action="/display-data" method="POST">
+        <form action="/display_data" method="POST">
             <div class="form-item">
                 <label>
                     <p>Display Data</p> 
@@ -41,7 +41,7 @@
                         <td class="name-row">{{ item['Count'] }}</td>
                         <td class="name-row">{{ item['Stay'] }}</td>
                         <td class="name-row">
-                            <a href="{{ url_for('update_data',id=item['_id'])}}">Update</a>
+                            <a href="{{ url_for('update_item',item_id=item['_id'])}}">Update</a>
                         </td>
                     </tr>
                 </tbody>

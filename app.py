@@ -1,5 +1,5 @@
 # Import Statements
-from flask import Flask,render_template,request,flash #Flask to make python program to a web-application
+from flask import Flask,render_template,redirect,request,flash #Flask to make python program to a web-application
 import pymongo # To connect to MongoDB
 from bson.objectid import ObjectId
 
@@ -49,7 +49,7 @@ def sign():
         return render_template("menu.html")
 
 # Menu Section
-@app.route("/menu-action",methods=['POST','GET'])
+@app.route("/menu_action",methods=['POST','GET'])
 def menu():
     if request.method == 'POST':
         choice = request.form['choice']
@@ -66,7 +66,7 @@ def menu():
             return render_template("menu.html")
 
 # Adding Data To MongoDB
-@app.route("/add-data",methods=['POST','GET'])
+@app.route("/add_data",methods=['POST','GET'])
 def add_data():
     if request.method =='POST':
         roomNo = request.form['roomNo']
@@ -84,7 +84,7 @@ def add_data():
         return render_template("display.html",data=data)
 
 # Removing Data From MongoDB
-@app.route("/remove-data",methods=['POST','GET'])
+@app.route("/remove_data",methods=['POST','GET'])
 def remove_data():
     if request.method == 'POST':
         roomNo = request.form['roomNo']
@@ -100,29 +100,26 @@ def remove_data():
     else:
         return render_template("menu.html")
 
+# Display Data In MongoDB
+@app.route("/display_data",methods=['POST','GET'])
+def display_data():
+    return render_template("menu.html")
+
 # Updating Data In MongoDB
-@app.route('/update_data/<id>',methods=['GET','POST'])
-def update_data(id):
-    book = table.find_one({'_id':ObjectId(id)})
-    render_template("update.html",book=book)
-    if request.method == 'POST':
+@app.route('/update_item/<item_id>',methods=['GET','POST'])
+def update_item(item_id):
+    item = table.find_one({'_id':ObjectId(item_id)})
+    if request.method =='POST':
         roomNo = request.form['roomNo']
         roomUser = request.form['roomUser']
         roomCount = request.form['roomCount']
         roomStay = request.form['roomStay']
         table.update_one(
-            {'_id':ObjectId(id)},
+            {'_id':ObjectId(item_id)},
             {'$set':{"RoomID":roomNo,"User":roomUser,"Count":roomCount,"Stay":roomStay}}
         )
-        data = table.find()
-        return render_template("display.html",data=data)
-    else:
-        return render_template("update.html")
-
-# Display Data In MongoDB
-@app.route("/display-data",methods=['POST','GET'])
-def display_data():
-    return render_template("menu.html")
+        return redirect('/display_data')
+    return render_template('update.html',item=item)
 
 # To start Flask Application
 if __name__ == '__main__':
