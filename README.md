@@ -56,8 +56,3 @@ python3 app.py
 ```
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 ```
-
-### Current Error :
-
-- Updation is not working
-- Hope to recieve on how to clear the update error
